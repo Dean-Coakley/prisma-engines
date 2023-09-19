@@ -293,8 +293,24 @@ pub(crate) trait SqlFlavour:
     fn search_path(&self) -> &str;
 }
 
+// fn env_is_set() -> bool {
+//     match env::var("ENVIRONMENT_VARIABLE") {
+//         Ok(s) => s == "yes",
+//         _ => false
+//     }
+// }
+
+// fn get_env_var(env_var: &str) -> str {
+//     match env::var("ENVIRONMENT_VARIABLE") {
+//         s => s,
+//         _ => ""
+//     }
+// }
+
+
 // Utility function shared by multiple flavours to compare shadow database and main connection.
 fn validate_connection_infos_do_not_match(previous: &str, next: &str) -> ConnectorResult<()> {
+
     if previous == next {
         Err(ConnectorError::from_msg("The shadow database you configured appears to be the same as the main database. Please specify another shadow database.".into()))
     } else {
